@@ -1,4 +1,4 @@
-package org.example;
+package org.example.operation;
 
 import java.util.UUID;
 
@@ -11,5 +11,5 @@ public abstract class Operation {
     }
 
     public abstract boolean canExecute();
-    public abstract void execute();
+    public abstract boolean execute();
 }

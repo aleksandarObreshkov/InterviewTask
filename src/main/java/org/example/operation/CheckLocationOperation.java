@@ -1,11 +1,11 @@
-package org.example;
+package org.example.operation;
 
-import java.util.Random;
+import org.example.Permissions;
+import org.example.error.OperationException;
+
 import java.util.Scanner;
 
 public class CheckLocationOperation extends SoftwareOperation implements Permissions {
-
-    private final Random random = new Random();
 
     @Override
     public boolean canExecute() {
@@ -17,12 +17,12 @@ public class CheckLocationOperation extends SoftwareOperation implements Permiss
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         if (isInPerimeter()) {
             System.out.println("User is in the defined perimeter");
-            return;
+            return true;
         }
-        throw new OperationException("User is not in the defined perimeter");
+        return false;
     }
 
     private boolean isInPerimeter() {

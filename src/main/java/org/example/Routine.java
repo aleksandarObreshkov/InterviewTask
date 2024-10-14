@@ -1,28 +1,31 @@
 package org.example;
 
-import java.util.List;
+import org.example.operation.Operation;
 
 public class Routine {
 
-    private final List<Operation> operations;
+    private final Operation currentOperation;
+    private final Routine left;
+    private final Routine right;
 
-    public Routine(List<Operation> operations) {
-        this.operations = operations;
+    public Routine(Operation currentOperation, Routine left, Routine right) {
+        this.currentOperation = currentOperation;
+        this.left = left;
+        this.right = right;
     }
 
     public void triggerRoutine() {
-        for (Operation operation : operations) {
-            // this can also be achieved by breaking the loop
-            // if canExecute() returns false instead of throwing an exception
-            try{
-                if (operation.canExecute()) {
-                    operation.execute();
+        if (currentOperation.canExecute()) {
+            boolean result = currentOperation.execute();
+            if (result) {
+                if (right != null) {
+                    right.triggerRoutine();
                 }
-            } catch (OperationException e) {
-                System.out.println(e.getMessage());
-                break;
+                return;
             }
-
+            if (left != null) {
+                left.triggerRoutine();
+            }
         }
     }
 }
