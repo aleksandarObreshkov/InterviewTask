@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class CheckLocationOperation extends SoftwareOperation implements Permissions {
 
@@ -25,13 +26,17 @@ public class CheckLocationOperation extends SoftwareOperation implements Permiss
     }
 
     private boolean isInPerimeter() {
-        return true;
-        //return this.random.nextBoolean();
+        Scanner in = new Scanner(System.in);
+        System.out.println("Is user in the defined perimeter? (y/n)");
+        String input = in.nextLine();
+        return input.equalsIgnoreCase("y");
     }
 
     @Override
     public boolean askForPermissions() {
-        return true;
-        //return this.random.nextBoolean();
+        Scanner in = new Scanner(System.in);
+        System.out.println("Do you grant permissions to the Routine to access Location? (y/n)");
+        String input = in.nextLine();
+        return input.equalsIgnoreCase("y");
     }
 }

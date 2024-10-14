@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class ToggleWifi extends HardwareOperation implements Permissions {
 
     public ToggleWifi() {
@@ -26,6 +28,8 @@ public class ToggleWifi extends HardwareOperation implements Permissions {
     @Override
     public boolean askForPermissions() {
         Scanner in = new Scanner(System.in);
-        return false;
+        System.out.println("Do you grant permissions to the Routine to access WiFi? (y/n)");
+        String input = in.nextLine();
+        return input.equalsIgnoreCase("y");
     }
 }
