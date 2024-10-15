@@ -5,15 +5,21 @@ import org.example.error.OperationException;
 
 import java.util.Scanner;
 
+import static java.lang.String.format;
+
 public class CheckLocationOperation extends SoftwareOperation implements Permissions {
+
+    public CheckLocationOperation() {
+        super("Google Maps");
+    }
 
     @Override
     public boolean canExecute() {
         if (askForPermissions()) {
-            System.out.println("User has granted permissions");
+            System.out.printf("User has granted permissions to %s%n", getAppId());
             return true;
         }
-        throw new OperationException("User has denied permissions");
+        throw new OperationException(format("User has denied permissions to %s%n", getAppId()));
     }
 
     @Override
@@ -35,7 +41,7 @@ public class CheckLocationOperation extends SoftwareOperation implements Permiss
     @Override
     public boolean askForPermissions() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Do you grant permissions to the Routine to access Location? (y/n)");
+        System.out.printf("Do you grant permissions to %s to access Location? (y/n)\n", getAppId());
         String input = in.nextLine();
         return input.equalsIgnoreCase("y");
     }
